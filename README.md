@@ -1,1 +1,1 @@
-##The goal of this repo is developing a simple RAT
+##Simple python worm
