@@ -11,7 +11,10 @@ import urllib
 source = ''
 with open('source.py','r') as file:
     for line in file:
-        source += line
+        #byPass imprt commands
+        if "import" in line:
+            pass
+        else:
+            source += line
 encode = base64.b64encode(source)
-print encode
 exec (base64.b64decode(encode))
