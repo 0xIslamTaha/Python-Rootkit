@@ -1,12 +1,4 @@
 import base64
-import subprocess
-import tempfile
-import _winreg
-import platform
-import time
-import os
-import socket
-import urllib
 
 source = ''
 with open('source.py','r') as file:
@@ -16,5 +8,9 @@ with open('source.py','r') as file:
             pass
         else:
             source += line
+
 encode = base64.b64encode(source)
+for i in xrange(9):
+    encode = base64.b64encode(encode)
+
 print(encode)
