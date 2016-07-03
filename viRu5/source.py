@@ -30,7 +30,7 @@ def set_reg_key_value(REG_PATH, name, value):
 def fire():
     if NO_IP_HOST:
         # Check if no-ip is online or not
-        check_no_ip_online()
+        get_noip_ip_address()
 
     if platform.machine().endswith('32'):
         try:
