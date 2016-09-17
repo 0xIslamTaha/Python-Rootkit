@@ -1,1 +1,1 @@
-##Simple python worm
+##python-rootkit
