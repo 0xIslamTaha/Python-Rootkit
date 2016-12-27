@@ -3,11 +3,11 @@
  This is a rootkit to bypass almost all antivirus and open a backdoor inside any windows machine which will establish a reverse https Metasploit connection to your listening machine. 
  
  Steps:
- 1- Generate the rootkit exe file using py2exe
- 2- Blind it with any photo, pdf, word or any kind of files
- 3- Send it to the victim
- 4- Use your social engineer skills to make him open the file
- 5- You will recieve a reverse https metasoplit connection :)
+ - Generate the rootkit exe file using py2exe
+ - Blind it with any photo, pdf, word or any kind of files
+ - Send it to the victim
+ - Use your social engineer skills to make him open the file
+ - You will recieve a reverse https metasoplit connection :)
  
  Testing on:
  - Windows 7 32bit
