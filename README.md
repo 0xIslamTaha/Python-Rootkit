@@ -1,5 +1,5 @@
 # python-rootkit
- This is a full undetectable python RAT which can bypass almost all antivirus and open a backdoor inside any **windows** machine which will establish a reverse https Metasploit connection to your listening machine. 
+ This is a full undetectable python RAT which can bypass almost all antivirus and open a backdoor inside any **windows** machine which will **establish a reverse https Metasploit connection to your listening machine. 
  
 # ViRu5 life cycle
 - Bypass all anti-virus.
