@@ -14,27 +14,22 @@
  - Add GoogleChromeAutoLaunch.py, setup.py and your icon as icon.ico to c:\python27 dir
  - From cmd do 
     ```bash
-    cd c:\python27
-    python setup.py py2exe
+    cd c:\python27 && python setup.py py2exe
     ```
- - Find the RAT exe file in Dist dir.
+ - Find the RAT file in Dist directiory.
  - Blind it with any photo, pdf, word or any kind of files
  - Send it to the victim
  - Use your social engineer skills to make him open the file
- - You will recieve a reverse https metasoplit connection :)
+ - You will recieve a reverse https Metasploit connection :)
  
  # Testing on
- - Windows 7 32bit
- - Winodws 7 64bit
- - Widowns 8 32bit
- - Windows 8 64bit
- - Windows 8.1 32bit
- - Windows 8.1 64 bit
- - Windows 10 32bit
- - Windows 10 64bit
+ - Windows 7 x64/x86
+ - Widowns 8 
+ - Windows 8.1 x64/x86
+ - Windows 10 x64/x86
  
 # Thanks
-Thanks for every security researsher how spend a time to help peaple and make the community more powerfull. Thanks for powerShellEmpire guys.
+Thanks for every security researcher how spend a time to help people and make the community more powerful. Thanks for powerShellEmpire guys.
 
  # Disclaimer
  This is for Educational purposes ONLY. First of all, this code aims to alarm people about security issues infected unpatched machines.
