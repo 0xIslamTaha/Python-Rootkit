@@ -19,8 +19,9 @@
  - Find the RAT file in Dist directiory.
  - Blind it with any photo, pdf, word or any kind of files
  - Send it to the victim
- - Use your social engineer skills to make him open the file
- - You will recieve a reverse https Metasploit connection :)
+ - Use your social engineer skills to make him open the files
+ - You will recieve a reverse https metasoplit connection :)
+
  
  # Testing on
  - Windows 7 x64/x86
